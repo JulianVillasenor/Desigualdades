@@ -1,0 +1,98 @@
+:root {
+  --ink: #10253f;
+  --muted: #587086;
+  --paper: #f4f7fb;
+  --surface: #ffffff;
+  --teal: #087f8c;
+  --cyan: #4cc9c0;
+  --coral: #ff6b5f;
+  --line: #cddae5;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; }
+body { background: radial-gradient(circle at 85% 10%, #dff7f5 0, transparent 30%), var(--paper); }
+
+.deck { height: 100%; }
+.slide {
+  display: none;
+  width: min(1180px, calc(100% - 5rem));
+  height: calc(100% - 6rem);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 5rem);
+  align-content: center;
+  animation: enter .35s ease both;
+}
+.slide.active { display: grid; }
+.cover { position: relative; overflow: hidden; }
+.eyebrow { color: var(--teal); font-size: .82rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+h1, h2, h3 { margin: 0; line-height: 1.03; }
+h1 { max-width: 800px; font-size: clamp(4rem, 9vw, 8.5rem); letter-spacing: -.065em; }
+h2 { max-width: 950px; margin: .8rem 0 2.4rem; font-size: clamp(2.4rem, 5vw, 5rem); letter-spacing: -.045em; }
+h3 { font-size: 1.55rem; }
+p { font-size: clamp(1rem, 1.5vw, 1.3rem); line-height: 1.55; }
+.lead { max-width: 700px; color: var(--muted); font-size: clamp(1.25rem, 2.4vw, 2rem); }
+.hint, .note, figcaption { color: var(--muted); font-size: .95rem; }
+.hint { position: absolute; bottom: 1rem; }
+.math, .formula { font-family: Georgia, "Times New Roman", serif; }
+.statement { font-size: clamp(1.3rem, 2.4vw, 2.2rem); }
+
+.split { display: grid; grid-template-columns: 1fr .85fr; gap: 5rem; align-items: center; }
+.cards { display: grid; gap: 1.25rem; }
+.cards.three { grid-template-columns: repeat(3, 1fr); }
+.cards.two { grid-template-columns: repeat(2, 1fr); }
+.cards article { min-height: 240px; padding: 2rem; border: 1px solid var(--line); border-radius: 1.2rem; background: rgba(255,255,255,.82); box-shadow: 0 18px 50px rgba(16,37,63,.07); }
+.cards article:nth-child(2) { transform: translateY(1rem); }
+.tag { display: inline-block; margin-bottom: 2rem; color: var(--teal); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.formula { font-size: 1.18rem; }
+.accent { color: var(--coral); font-size: 1.55rem; }
+
+.proof { display: grid; gap: .85rem; max-width: 900px; }
+.proof p { margin: 0; padding: 1rem 1.3rem; border-left: 3px solid var(--cyan); background: rgba(255,255,255,.72); }
+.proof.compact { gap: .5rem; }
+.step { display: inline-grid; width: 1.8rem; height: 1.8rem; margin-right: .7rem; place-items: center; border-radius: 50%; color: white; background: var(--teal); font-size: .85rem; font-weight: 800; }
+.result { width: fit-content; margin-top: 1.5rem; padding: 1.1rem 1.5rem; border-radius: .75rem; color: white; background: var(--ink); font-family: Georgia, serif; font-size: clamp(1.2rem, 2vw, 1.8rem); }
+.equation-flow { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; font-family: Georgia, serif; font-size: clamp(1.1rem, 2vw, 1.65rem); }
+.equation-flow span { padding: 1rem; background: white; border: 1px solid var(--line); border-radius: .6rem; }
+.equation-flow b { color: var(--coral); }
+
+.tail-card { position: relative; height: 280px; overflow: hidden; border-bottom: 2px solid var(--ink); }
+.tail-line { position: absolute; inset: 25px 0 0; border-radius: 60% 0 0; border-top: 5px solid var(--ink); transform: skewY(-16deg); }
+.tail-fill { position: absolute; right: 0; bottom: 0; width: 34%; height: 65%; background: linear-gradient(135deg, rgba(255,107,95,.1), rgba(255,107,95,.7)); clip-path: polygon(0 100%, 35% 20%, 100% 0, 100% 100%); }
+.tail-card span { position: absolute; right: 32%; bottom: -2rem; font-family: Georgia, serif; font-size: 1.5rem; }
+.cover-graphic { position: absolute; right: 2%; bottom: 10%; width: 38%; height: 45%; opacity: .85; }
+.curve { position: absolute; inset: 0; border-top: 10px solid var(--cyan); border-radius: 60% 0 0; transform: skewY(-18deg); }
+.curve-b { inset: 22% 0 0 20%; border-color: var(--coral); }
+.threshold { position: absolute; right: 25%; top: 10%; bottom: 0; border-left: 2px dashed var(--ink); }
+
+.figure-slide { grid-template-rows: auto auto minmax(0, 1fr); }
+.figure-slide h2 { margin-bottom: 1rem; }
+figure { display: grid; min-height: 0; margin: 0; justify-items: center; }
+figure img { max-width: 100%; max-height: calc(100vh - 18rem); border-radius: .8rem; background: white; box-shadow: 0 18px 55px rgba(16,37,63,.1); }
+figcaption { margin-top: .6rem; }
+.takeaways { display: grid; gap: .5rem; max-width: 900px; }
+.takeaways p { display: grid; grid-template-columns: 150px 1fr; gap: 1rem; margin: 0; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+.takeaways strong { color: var(--teal); }
+.closing { margin-top: 2rem; font-size: clamp(1.35rem, 2.5vw, 2.2rem); font-weight: 750; }
+
+.controls { position: fixed; right: 1.5rem; bottom: 1rem; left: 1.5rem; display: flex; align-items: center; gap: .75rem; z-index: 10; }
+.controls button { width: 2.65rem; height: 2.65rem; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: rgba(255,255,255,.9); font-size: 1.35rem; cursor: pointer; }
+.controls button:hover { color: white; background: var(--teal); }
+.controls button:disabled { opacity: .35; cursor: default; }
+.progress { flex: 1; height: 4px; overflow: hidden; border-radius: 10px; background: var(--line); }
+.progress span { display: block; width: 0; height: 100%; background: var(--coral); transition: width .25s ease; }
+#counter { min-width: 4rem; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
+
+@keyframes enter { from { opacity: 0; transform: translateY(12px); } }
+@media (max-width: 780px) {
+  .slide { width: calc(100% - 1rem); height: calc(100% - 5rem); padding: 1.5rem; overflow-y: auto; }
+  .split, .cards.three, .cards.two { grid-template-columns: 1fr; gap: 1rem; }
+  .cards article { min-height: auto; padding: 1.2rem; }
+  .cards article:nth-child(2) { transform: none; }
+  .cover-graphic { opacity: .25; width: 70%; }
+  .takeaways p { grid-template-columns: 1fr; gap: .2rem; }
+}
+@media (prefers-reduced-motion: reduce) { .slide { animation: none; } }

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Presentación del proyecto sobre desigualdades de Markov, Chebyshev y Chernoff">
+  <title>Desigualdades probabilísticas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide active cover" data-title="Inicio">
+      <div class="eyebrow">Probabilidad · MCD</div>
+      <h1>Acotar lo improbable</h1>
+      <p class="lead">Desigualdades de Markov, Chebyshev y Chernoff</p>
+      <div class="cover-graphic" aria-hidden="true">
+        <span class="curve curve-a"></span><span class="curve curve-b"></span><span class="threshold"></span>
+      </div>
+      <p class="hint">Usa las flechas del teclado para avanzar</p>
+    </section>
+
+    <section class="slide" data-title="Pregunta">
+      <div class="eyebrow">El problema</div>
+      <h2>¿Qué tan probable es un evento extremo?</h2>
+      <div class="split">
+        <div>
+          <p class="statement">Queremos controlar <span class="math">P(X ≥ a)</span> sin reconstruir toda la distribución.</p>
+          <p>Las desigualdades cambian información por precisión: media, varianza o función generadora de momentos.</p>
+        </div>
+        <div class="tail-card" aria-label="Esquema de una cola de distribución">
+          <div class="tail-fill"></div><div class="tail-line"></div><span>a</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Tres cotas">
+      <div class="eyebrow">Una jerarquía de información</div>
+      <h2>Tres caminos hacia una cota</h2>
+      <div class="cards three">
+        <article><span class="tag">Media</span><h3>Markov</h3><p class="formula">P(X ≥ a) ≤ E[X] / a</p><p>General y económica.</p></article>
+        <article><span class="tag">Media + varianza</span><h3>Chebyshev</h3><p class="formula">P(|X − μ| ≥ t) ≤ σ² / t²</p><p>Controla desviaciones.</p></article>
+        <article><span class="tag">MGF</span><h3>Chernoff</h3><p class="formula">P(X ≥ a) ≤ inf e<sup>−θa</sup>M<sub>X</sub>(θ)</p><p>Captura el decaimiento de la cola.</p></article>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Markov">
+      <div class="eyebrow">Primera demostración</div>
+      <h2>Markov: convertir magnitud en probabilidad</h2>
+      <div class="proof">
+        <p><span class="step">1</span> Si <span class="math">X ≥ 0</span>, entonces <span class="math">X ≥ a · 1<sub>{X≥a}</sub></span>.</p>
+        <p><span class="step">2</span> Tomamos esperanza: <span class="math">E[X] ≥ a P(X ≥ a)</span>.</p>
+        <p><span class="step">3</span> Dividimos entre <span class="math">a &gt; 0</span>.</p>
+      </div>
+      <div class="result">P(X ≥ a) ≤ E[X] / a</div>
+    </section>
+
+    <section class="slide" data-title="Chebyshev">
+      <div class="eyebrow">Segunda demostración</div>
+      <h2>Chebyshev nace de Markov</h2>
+      <p class="statement">Aplicamos Markov a la variable no negativa <span class="math">Y = (X − μ)²</span>.</p>
+      <div class="equation-flow">
+        <span>P(|X−μ| ≥ t)</span><b>=</b><span>P((X−μ)² ≥ t²)</span><b>≤</b><span>E[(X−μ)²] / t²</span>
+      </div>
+      <div class="result">P(|X − μ| ≥ t) ≤ Var(X) / t²</div>
+      <p class="note">Para la cola superior usamos <span class="math">t = a − μ</span>, con <span class="math">a &gt; μ</span>.</p>
+    </section>
+
+    <section class="slide" data-title="Chernoff">
+      <div class="eyebrow">Tercera demostración</div>
+      <h2>Chernoff: transformar y optimizar</h2>
+      <div class="proof compact">
+        <p><span class="step">1</span> Transformamos: <span class="math">X ↦ e<sup>θX</sup></span>, con <span class="math">θ &gt; 0</span>.</p>
+        <p><span class="step">2</span> Markov: <span class="math">P(X ≥ a) ≤ e<sup>−θa</sup>M<sub>X</sub>(θ)</span>.</p>
+        <p><span class="step">3</span> Elegimos el mejor valor admisible de <span class="math">θ</span>.</p>
+      </div>
+      <div class="result">P(X ≥ a) ≤ inf<sub>θ&gt;0</sub> e<sup>−θa</sup>M<sub>X</sub>(θ)</div>
+    </section>
+
+    <section class="slide" data-title="Modelos">
+      <div class="eyebrow">Dos distribuciones</div>
+      <h2>MGF y cotas optimizadas</h2>
+      <div class="cards two">
+        <article><h3>Poisson(λ)</h3><p class="formula">M(θ) = exp{λ(e<sup>θ</sup>−1)}</p><p>Para un entero <span class="math">k &gt; λ</span>:</p><p class="formula accent">e<sup>−λ</sup>(eλ/k)<sup>k</sup></p></article>
+        <article><h3>Exponencial(λ)</h3><p class="formula">M(θ) = λ/(λ−θ), θ &lt; λ</p><p>Para <span class="math">a &gt; 1/λ</span>:</p><p class="formula accent">λa · e<sup>1−λa</sup></p></article>
+      </div>
+    </section>
+
+    <section class="slide figure-slide" data-title="Poisson">
+      <div class="eyebrow">Experimento computacional</div>
+      <h2>Cola de Poisson frente a las cotas</h2>
+      <figure>
+        <img src="../figures/comparacion_poisson.svg" alt="Comparación de la cola exacta de Poisson con las cotas de Markov, Chebyshev y Chernoff">
+        <figcaption>La escala logarítmica revela las diferencias para eventos cada vez más extremos.</figcaption>
+      </figure>
+    </section>
+
+    <section class="slide figure-slide" data-title="Exponencial">
+      <div class="eyebrow">Experimento computacional</div>
+      <h2>Cola exponencial frente a las cotas</h2>
+      <figure>
+        <img src="../figures/comparacion_exponencial.svg" alt="Comparación de la cola exacta exponencial con las cotas de Markov, Chebyshev y Chernoff">
+        <figcaption>Chernoff reproduce el comportamiento exponencial de la cola.</figcaption>
+      </figure>
+    </section>
+
+    <section class="slide" data-title="Conclusiones">
+      <div class="eyebrow">Lo que aprendimos</div>
+      <h2>Más información produce mejores cotas</h2>
+      <div class="takeaways">
+        <p><strong>Markov</strong><span>Máxima generalidad; menor precisión.</span></p>
+        <p><strong>Chebyshev</strong><span>La varianza mejora el control, pero la cota es bilateral.</span></p>
+        <p><strong>Chernoff</strong><span>La MGF captura mejor el régimen de eventos extremos.</span></p>
+      </div>
+      <p class="closing">No buscamos siempre la probabilidad exacta.<br>Buscamos una garantía útil.</p>
+    </section>
+  </main>
+
+  <nav class="controls" aria-label="Controles de la presentación">
+    <button id="prev" type="button" aria-label="Diapositiva anterior">‹</button>
+    <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+    <span id="counter" aria-label="Número de diapositiva"></span>
+    <button id="next" type="button" aria-label="Diapositiva siguiente">›</button>
+    <button id="fullscreen" type="button" aria-label="Pantalla completa">⛶</button>
+  </nav>
+  <script src="script.js"></script>
+</body>
+</html>

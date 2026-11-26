@@ -80,7 +80,13 @@ Desigualdades/
 │   └── visualizacion.py
 ├── notebooks/
 │   └── desigualdades.ipynb
+├── figures/
+│   ├── comparacion_poisson.svg
+│   └── comparacion_exponencial.svg
 ├── presentacion/
+│   ├── index.html
+│   ├── styles.css
+│   └── script.js
 ├── Desigualdade.png
 ├── instrucciones.png
 ├── requirements.txt
@@ -90,6 +96,8 @@ Desigualdades/
 - `notebooks/desigualdades.ipynb`: demostraciones, experimentos, tablas, gráficas y conclusiones.
 - `funciones/cotas.py`: implementación de las cotas y construcción de tablas comparativas.
 - `funciones/visualizacion.py`: gráfica de probabilidades exactas y cotas.
+- `figures/`: imágenes PNG y SVG exportadas automáticamente por el notebook.
+- `presentacion/`: presentación web con navegación mediante botones o teclado.
 - `requirements.txt`: dependencias y versiones instaladas en el ambiente de desarrollo.
 - `presentacion/`: materiales para la exposición del proyecto.
 
@@ -153,6 +161,8 @@ jupyter lab
 ```
 
 Abrir `notebooks/desigualdades.ipynb` y seleccionar el kernel **Python (Desigualdades)**. Después, ejecutar todas las celdas en orden.
+
+Al ejecutar las celdas de visualización se crean las figuras utilizadas por la presentación. Para exponer el proyecto, abrir `presentacion/index.html` en un navegador. Las flechas izquierda y derecha cambian de diapositiva y la tecla `F` activa la pantalla completa.
 
 Para comprobar las dependencias desde la terminal:
 
