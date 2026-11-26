@@ -1,0 +1,50 @@
+# Ambientes virtuales
+.venv/
+venv/
+env/
+
+# Variables de entorno y configuracion local
+.env
+.env.*
+!.env.example
+
+# Cache y archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Empaquetado de Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Editores e IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.swp
+~$*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Salidas generadas localmente
+output/
+outputs/
