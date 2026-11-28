@@ -1,0 +1,23 @@
+/* Agregado para las diapositivas de la memoria. Solo define clases nuevas
+   y usa las variables de color de styles.css; no cambia ninguna regla existente. */
+.memo-table {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 0 1rem;
+  border: 1px solid var(--line);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 18px 50px rgba(16,37,63,.07);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-variant-numeric: tabular-nums;
+}
+.memo-table th, .memo-table td { padding: .55em 1.1em; text-align: right; border-bottom: 1px solid var(--line); }
+.memo-table tbody tr:last-child td { border-bottom: 0; }
+.memo-table th:first-child, .memo-table td:first-child { text-align: left; }
+.memo-table th { color: var(--teal); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.memo-table th:first-child { color: var(--teal); font-family: Georgia, "Times New Roman", serif; font-size: 1rem; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.memo-table td:first-child { font-family: Georgia, "Times New Roman", serif; }
+.memo-table .best { color: var(--coral); font-weight: 800; }

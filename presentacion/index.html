@@ -6,6 +6,7 @@
   <meta name="description" content="Presentación del proyecto sobre desigualdades de Markov, Chebyshev y Chernoff">
   <title>Desigualdades probabilísticas</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="memoria.css">
 </head>
 <body>
   <main class="deck" aria-live="polite">
@@ -40,6 +41,29 @@
         <article><span class="tag">Media</span><h3>Markov</h3><p class="formula">P(X ≥ a) ≤ E[X] / a</p><p>General y económica.</p></article>
         <article><span class="tag">Media + varianza</span><h3>Chebyshev</h3><p class="formula">P(|X − μ| ≥ t) ≤ σ² / t²</p><p>Controla desviaciones.</p></article>
         <article><span class="tag">MGF</span><h3>Chernoff</h3><p class="formula">P(X ≥ a) ≤ inf e<sup>−θa</sup>M<sub>X</sub>(θ)</p><p>Captura el decaimiento de la cola.</p></article>
+      </div>
+    </section>
+
+    <!-- Agregado (memoria): definiciones -->
+    <section class="slide" data-title="Definiciones">
+      <div class="eyebrow">Lo que vamos a usar</div>
+      <h2>Definiciones</h2>
+      <div class="takeaways">
+        <p><strong>Cola</strong><span>P(X ≥ a). Una cota sirve si da menos que 1.</span></p>
+        <p><strong>Momentos</strong><span>μ = E[X] y σ² = E[(X − μ)²].</span></p>
+        <p><strong>Generadora</strong><span>M(θ) = E[e<sup>θX</sup>], donde sea finita.</span></p>
+        <p><strong>Poisson(λ)</strong><span>P(X = k) = e<sup>−λ</sup>λ<sup>k</sup>/k!, con media y varianza λ.</span></p>
+        <p><strong>Exponencial</strong><span>Tasa λ: densidad λe<sup>−λy</sup>, media 1/λ y cola e<sup>−λa</sup>.</span></p>
+      </div>
+    </section>
+    <!-- Agregado (memoria): hipótesis de cada cota -->
+    <section class="slide" data-title="Hipótesis">
+      <div class="eyebrow">Antes de las cuentas</div>
+      <h2>Qué pide cada cota</h2>
+      <div class="cards three">
+        <article><span class="tag">X no negativa</span><h3>Markov</h3><p class="formula">a &gt; 0; sirve si a &gt; μ</p><p>Con X = ±10: media 0, pero P(X ≥ 5) = 1/2.</p></article>
+        <article><span class="tag">Varianza finita</span><h3>Chebyshev</h3><p class="formula">sirve si a &gt; μ + σ</p><p>Cota: σ² / (a − μ)².</p></article>
+        <article><span class="tag">MGF finita</span><h3>Chernoff</h3><p class="formula">sirve si a &gt; μ</p><p>M(θ) &lt; ∞ para algún θ &gt; 0; no pide X ≥ 0.</p></article>
       </div>
     </section>
 
@@ -85,6 +109,30 @@
       </div>
     </section>
 
+    <!-- Agregado (memoria): de dónde salen las funciones generadoras -->
+    <section class="slide" data-title="De dónde sale M(θ)">
+      <div class="eyebrow">Funciones generadoras</div>
+      <h2>¿Para qué θ existe M(θ)?</h2>
+      <div class="cards two">
+        <article><h3>Poisson(λ)</h3><p class="formula">Σ<sub>k</sub> e<sup>θk</sup>·e<sup>−λ</sup>λ<sup>k</sup>/k! = exp{λ(e<sup>θ</sup>−1)}</p><p>Es la serie de e<sup>x</sup>: existe para <strong>todo θ</strong>.</p></article>
+        <article><h3>Exponencial(λ)</h3><p class="formula">λ ∫<sub>0</sub><sup>∞</sup> e<sup>−(λ−θ)y</sup> dy = λ/(λ−θ)</p><p>Si θ ≥ λ, la integral diverge: <strong>solo θ &lt; λ</strong>.</p></article>
+      </div>
+      <p class="note">La cola exponencial baja como e<sup>−λy</sup>: con θ ≥ λ ya no alcanza a compensar a e<sup>θy</sup>.</p>
+    </section>
+
+    <!-- Agregado (memoria): cómo se elige el mejor θ -->
+    <section class="slide" data-title="Mejor θ">
+      <div class="eyebrow">Optimizar la cota</div>
+      <h2>Cómo se elige el mejor θ</h2>
+      <div class="proof compact">
+        <p><span class="step">1</span> Minimizamos <span class="math">ψ(θ) = log M(θ) − θa</span>; como <span class="math">ψ″ &gt; 0</span>, es un mínimo.</p>
+        <p><span class="step">2</span> Poisson: <span class="math">λe<sup>θ</sup> = a</span> ⇒ <span class="math">θ* = log(a/λ)</span>, si <span class="math">a &gt; λ</span>.</p>
+        <p><span class="step">3</span> Exponencial: <span class="math">1/(λ − θ) = a</span> ⇒ <span class="math">θ* = λ − 1/a</span>, si <span class="math">a &gt; 1/λ</span>.</p>
+      </div>
+      <div class="result">Exponencial: cota / exacta = e·λa</div>
+      <p class="note">Acierta la velocidad de la cola; solo pierde un factor lineal.</p>
+    </section>
+
     <section class="slide figure-slide" data-title="Poisson">
       <div class="eyebrow">Experimento computacional</div>
       <h2>Cola de Poisson frente a las cotas</h2>
@@ -101,6 +149,52 @@
         <img src="../figures/comparacion_exponencial.svg" alt="Comparación de la cola exacta exponencial con las cotas de Markov, Chebyshev y Chernoff">
         <figcaption>Chernoff reproduce el comportamiento exponencial de la cola.</figcaption>
       </figure>
+    </section>
+
+    <!-- Agregado (memoria): tabla de la Poisson -->
+    <section class="slide" data-title="Tabla Poisson">
+      <div class="eyebrow">Cálculos de cola · Poisson(5)</div>
+      <h2>Chernoff gana desde k = 7</h2>
+      <table class="memo-table">
+        <thead><tr><th>k</th><th>Exacta</th><th>Markov</th><th>Chebyshev</th><th>Chernoff</th></tr></thead>
+        <tbody>
+          <tr><td>6</td><td>0.384</td><td class="best">0.833</td><td>≥ 1</td><td>0.910</td></tr>
+          <tr><td>7</td><td>0.238</td><td>0.714</td><td>≥ 1</td><td class="best">0.701</td></tr>
+          <tr><td>8</td><td>0.133</td><td>0.625</td><td>0.556</td><td class="best">0.468</td></tr>
+          <tr><td>10</td><td>0.0318</td><td>0.500</td><td>0.200</td><td class="best">0.145</td></tr>
+          <tr><td>20</td><td>3.45 × 10<sup>−7</sup></td><td>0.250</td><td>0.0222</td><td class="best">2.97 × 10<sup>−6</sup></td></tr>
+        </tbody>
+      </table>
+      <p class="note">En coral, la mejor cota. En k = 20, Chernoff se pasa 8.6 veces; Chebyshev, 6.4 × 10<sup>4</sup>.</p>
+    </section>
+
+    <!-- Agregado (memoria): tabla de la exponencial -->
+    <section class="slide" data-title="Tabla exponencial">
+      <div class="eyebrow">Cálculos de cola · Exponencial(2)</div>
+      <h2>Aquí el orden cambia</h2>
+      <table class="memo-table">
+        <thead><tr><th>u = a / E[Y]</th><th>Exacta</th><th>Markov</th><th>Chebyshev</th><th>Chernoff</th></tr></thead>
+        <tbody>
+          <tr><td>1.25</td><td>0.287</td><td class="best">0.800</td><td>≥ 1</td><td>0.974</td></tr>
+          <tr><td>2.15</td><td>0.116</td><td class="best">0.465</td><td>0.756</td><td>0.681</td></tr>
+          <tr><td>3.05</td><td>0.0474</td><td>0.328</td><td class="best">0.238</td><td>0.393</td></tr>
+          <tr><td>6.20</td><td>2.03 × 10<sup>−3</sup></td><td>0.161</td><td>0.0370</td><td class="best">0.0342</td></tr>
+          <tr><td>8.00</td><td>3.35 × 10<sup>−4</sup></td><td>0.125</td><td>0.0204</td><td class="best">7.30 × 10<sup>−3</sup></td></tr>
+        </tbody>
+      </table>
+      <p class="note">Markov gana si u &lt; 2.62, Chebyshev hasta 6.02 y Chernoff después: 4, 7 y 5 de los 16 umbrales.</p>
+    </section>
+
+    <!-- Agregado (memoria): lectura de los resultados -->
+    <section class="slide" data-title="Lectura">
+      <div class="eyebrow">Lectura de los resultados</div>
+      <h2>Qué cota gana, y por qué</h2>
+      <div class="takeaways">
+        <p><strong>Poisson</strong><span>Su cola baja más rápido que cualquier exponencial: gana Chernoff.</span></p>
+        <p><strong>Exponencial</strong><span>Chernoff carga el factor e·u: gana pasando 6 veces la media.</span></p>
+        <p><strong>Variar λ</strong><span>La exponencial no cambia; en la Poisson, Chernoff mejora con λ.</span></p>
+        <p><strong>Límite</strong><span>Sin función generadora (lognormal, Pareto) no hay Chernoff.</span></p>
+      </div>
     </section>
 
     <section class="slide" data-title="Conclusiones">
